@@ -1,4 +1,4 @@
-# Package for extract metadata in Office files
+# Package for extract metadata of Office files
 
 This package is intended to be a powerful alternative to other solutions for extract metadata from Office files.
 
