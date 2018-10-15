@@ -1,5 +1,8 @@
 # Package for extract metadata of Office files
 
+[![Travis build](https://api.travis-ci.org/kevinborras/metagoffice.svg)](https://github.com/kevinborras/metagoffice)
+
+
 This package is intended to be a powerful alternative to other solutions for extract metadata from Office files.
 
 The main features of metagoffice are:
