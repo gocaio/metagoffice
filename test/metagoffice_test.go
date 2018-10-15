@@ -40,7 +40,7 @@ var powerExpectedResult = metagoffice.XMLContent{
 }
 
 func TestDocxDocumment(t *testing.T) {
-	actualResult := metagoffice.GetContent("test/document.docx")
+	actualResult := metagoffice.GetContent("document.docx")
 
 	if !reflect.DeepEqual(docExpectedResult, actualResult) {
 		t.Fatalf("Expected %s but got %s", docExpectedResult, actualResult)
@@ -48,7 +48,7 @@ func TestDocxDocumment(t *testing.T) {
 }
 
 func TestExcelDocumment(t *testing.T) {
-	actualResult := metagoffice.GetContent("test/Book1.xslx")
+	actualResult := metagoffice.GetContent("Book1.xslx")
 
 	if !reflect.DeepEqual(excelExpectedResult, actualResult) {
 		t.Fatalf("Expected %s but got %s", excelExpectedResult, actualResult)
@@ -56,7 +56,7 @@ func TestExcelDocumment(t *testing.T) {
 }
 
 func TestPowerDocumment(t *testing.T) {
-	actualResult := metagoffice.GetContent("test/Presentation1.pptx")
+	actualResult := metagoffice.GetContent("Presentation1.pptx")
 
 	if !reflect.DeepEqual(powerExpectedResult, actualResult) {
 		t.Fatalf("Expected %s but got %s", powerExpectedResult, actualResult)
