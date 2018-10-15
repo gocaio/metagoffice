@@ -25,7 +25,6 @@ type XMLContent struct {
 
 //GetContent function
 func GetContent(document string) (fields XMLContent) {
-
 	dot := strings.Index(document, ".")
 	zipFile := document[:dot] + ".zip"
 	os.Rename(document, zipFile)

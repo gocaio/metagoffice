@@ -48,7 +48,7 @@ func TestDocxDocumment(t *testing.T) {
 }
 
 func TestExcelDocumment(t *testing.T) {
-	actualResult := metagoffice.GetContent("test/Book1.xlsx")
+	actualResult := metagoffice.GetContent("test/Book1.xslx")
 
 	if !reflect.DeepEqual(excelExpectedResult, actualResult) {
 		t.Fatalf("Expected %s but got %s", excelExpectedResult, actualResult)

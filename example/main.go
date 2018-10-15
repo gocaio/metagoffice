@@ -8,7 +8,7 @@ import (
 
 func main() {
 	
-	content := metagoffice.GetContent("document.docx")
+	content := metagoffice.GetContent("example/document.docx")
 
 	fmt.Println("Title: ", content.Title)
 	fmt.Println("Subject: ", content.Subject)
