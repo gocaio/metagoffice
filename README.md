@@ -1,7 +1,7 @@
-# Package for extract metadata of Office files
+# Package to extract metadata of Office files
 
 [![Travis build](https://travis-ci.com/kevinborras/metagoffice.svg?branch=master)](https://travis-ci.com/kevinborras/metagoffice)
-
+[![Go Report Card](https://goreportcard.com/badge/github.com/kevinborras/metagoffice)](https://goreportcard.com/report/github.com/kevinborras/metagoffice)
 
 This package is intended to be a powerful alternative to other solutions for extract metadata from Office files.
 
