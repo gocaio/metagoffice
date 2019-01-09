@@ -44,16 +44,16 @@ type XMLContent struct {
 func GetContent(document *os.File) (fields XMLContent, err error) {
 	fileName := document.Name()
 	d := XMLContent{}
-	dot := strings.Index(fileName, ".")
-	before := fileName[:dot] + ".zip"
-	err = os.Rename(fileName, before)
+	dot := strings.LastIndex(fileName, ".")
+	after := fileName[:dot] + ".zip"
+	err = os.Rename(fileName, after)
 	if err != nil {
 		return fields, errors.New("Failed to rename as .zip")
 	}
 
-	read, err := zip.OpenReader(before)
+	read, err := zip.OpenReader(after)
 	if err != nil {
-		os.Rename(before, fileName)
+		os.Rename(after, fileName)
 		return fields, errors.New("Failed to open the file")
 	}
 
@@ -66,18 +66,18 @@ func GetContent(document *os.File) (fields XMLContent, err error) {
 				xmlFile += scanner.Text()
 			}
 			if err != nil {
-				os.Rename(before, fileName)
+				os.Rename(after, fileName)
 				return fields, errors.New("Failed to open docProps/core.xml")
 			}
 			defer rc.Close()
 		}
 	}
 	if err := xml.Unmarshal([]byte(xmlFile), &d); err != nil {
-		os.Rename(before, fileName)
+		os.Rename(after, fileName)
 		return fields, errors.New("Failed to Unmarshal")
 	}
 
 	read.Close()
-	os.Rename(before, fileName)
+	os.Rename(after, fileName)
 	return d, err
 }
