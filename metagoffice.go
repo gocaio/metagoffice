@@ -21,7 +21,7 @@ import (
 	"archive/zip"
 	"bufio"
 	"encoding/xml"
-	"log"
+	"errors"
 	"os"
 	"strings"
 )
@@ -41,15 +41,20 @@ type XMLContent struct {
 }
 
 //GetContent function
-func GetContent(document string) (fields XMLContent) {
-	dot := strings.Index(document, ".")
-	zipFile := document[:dot] + ".zip"
-	os.Rename(document, zipFile)
-
-	read, err := zip.OpenReader(zipFile)
+func GetContent(document *os.File) (fields XMLContent, err error) {
+	fileName := document.Name()
+	d := XMLContent{}
+	dot := strings.Index(fileName, ".")
+	before := fileName[:dot] + ".zip"
+	err = os.Rename(fileName, before)
 	if err != nil {
-		msg := "Failed to open: %s"
-		log.Fatalf(msg, err)
+		return fields, errors.New("Failed to rename as .zip")
+	}
+
+	read, err := zip.OpenReader(before)
+	if err != nil {
+		os.Rename(before, fileName)
+		return fields, errors.New("Failed to open the file")
 	}
 
 	var xmlFile string
@@ -61,16 +66,18 @@ func GetContent(document string) (fields XMLContent) {
 				xmlFile += scanner.Text()
 			}
 			if err != nil {
-				log.Fatal(err)
+				os.Rename(before, fileName)
+				return fields, errors.New("Failed to open docProps/core.xml")
 			}
 			defer rc.Close()
 		}
 	}
-	d := XMLContent{}
 	if err := xml.Unmarshal([]byte(xmlFile), &d); err != nil {
-		log.Fatal(err)
+		os.Rename(before, fileName)
+		return fields, errors.New("Failed to Unmarshal")
 	}
+
 	read.Close()
-	os.Rename(zipFile, document)
-	return d
+	os.Rename(before, fileName)
+	return d, err
 }
