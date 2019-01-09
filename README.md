@@ -25,7 +25,15 @@ import (
 
 func main() {
 	
-	content := metagoffice.GetContent("document.docx")
+	file, err := os.Open("document.docx")
+	if err != nil {
+		log.Fatal(err)
+	}
+	file.Close()
+	content, err := metagoffice.GetContent(file)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	fmt.Println("Title: ", content.Title)
 	fmt.Println("Subject: ", content.Subject)

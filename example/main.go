@@ -19,13 +19,23 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 
 	"github.com/kevinborras/metagoffice"
 )
 
 func main() {
 
-	content := metagoffice.GetContent("example/document.docx")
+	file, err := os.Open("document.docx")
+	if err != nil {
+		log.Fatal(err)
+	}
+	file.Close()
+	content, err := metagoffice.GetContent(file)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	fmt.Println("Title: ", content.Title)
 	fmt.Println("Subject: ", content.Subject)
@@ -39,3 +49,4 @@ func main() {
 	fmt.Println("Category: ", content.Category)
 
 }
+

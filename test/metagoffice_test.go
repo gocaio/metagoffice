@@ -18,6 +18,8 @@
 package test
 
 import (
+	"log"
+	"os"
 	"reflect"
 	"testing"
 
@@ -57,25 +59,47 @@ var powerExpectedResult = metagoffice.XMLContent{
 }
 
 func TestDocxDocumment(t *testing.T) {
-	actualResult := metagoffice.GetContent("document.docx")
-
+	file, err := os.Open("document.docx")
+	if err != nil {
+		log.Fatal(err)
+	}
+	file.Close()
+	actualResult, err := metagoffice.GetContent(file)
+	if err != nil {
+		log.Fatal(err)
+	}
 	if !reflect.DeepEqual(docExpectedResult, actualResult) {
 		t.Fatalf("Expected %s but got %s", docExpectedResult, actualResult)
 	}
 }
 
 func TestExcelDocumment(t *testing.T) {
-	actualResult := metagoffice.GetContent("Book1.xslx")
-
+	file, err := os.Open("Book1.xslx")
+	if err != nil {
+		log.Fatal(err)
+	}
+	file.Close()
+	actualResult, err := metagoffice.GetContent(file)
+	if err != nil {
+		log.Fatal(err)
+	}
 	if !reflect.DeepEqual(excelExpectedResult, actualResult) {
 		t.Fatalf("Expected %s but got %s", excelExpectedResult, actualResult)
 	}
 }
 
 func TestPowerDocumment(t *testing.T) {
-	actualResult := metagoffice.GetContent("Presentation1.pptx")
-
+	file, err := os.Open("Presentation1.pptx")
+	if err != nil {
+		log.Fatal(err)
+	}
+	file.Close()
+	actualResult, err := metagoffice.GetContent(file)
+	if err != nil {
+		log.Fatal(err)
+	}
 	if !reflect.DeepEqual(powerExpectedResult, actualResult) {
 		t.Fatalf("Expected %s but got %s", powerExpectedResult, actualResult)
 	}
 }
+
