@@ -20,7 +20,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/kevinborras/metagoffice"
+	"github.com/gocaio/metagoffice"
 )
 
 func main() {
