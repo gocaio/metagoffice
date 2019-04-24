@@ -148,3 +148,4 @@ build
 
 # vscode folder
 .vscode/*
+*.mod

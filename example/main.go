@@ -22,7 +22,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/kevinborras/metagoffice"
+	"github.com/gocaio/metagoffice"
 )
 
 func main() {
@@ -49,4 +49,3 @@ func main() {
 	fmt.Println("Category: ", content.Category)
 
 }
-

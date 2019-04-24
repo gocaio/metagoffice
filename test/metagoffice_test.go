@@ -23,7 +23,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/kevinborras/metagoffice"
+	"github.com/gocaio/metagoffice"
 )
 
 var docExpectedResult = metagoffice.XMLContent{
@@ -102,4 +102,3 @@ func TestPowerDocumment(t *testing.T) {
 		t.Fatalf("Expected %s but got %s", powerExpectedResult, actualResult)
 	}
 }
-
